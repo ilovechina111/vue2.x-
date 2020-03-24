@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     submitHandler(e) {
-        e.preventDefault()
+        e.preventDefault();
         console.log("注册了");
         
     }
