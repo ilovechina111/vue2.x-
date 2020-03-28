@@ -77,8 +77,8 @@ export default {
       try{
         const result = await this.$http.get('/api/login',{params:this.model})
         if(result.data.code == "0"){
-          this.$store.commit('settoken',result.data.token)
-          window.localStorage.setItem('token',result.data.token)
+          this.$store.commit('settoken',result.token)
+          window.localStorage.setItem('token',result.token)
         }else{
           alert(result.data.message)
         }
