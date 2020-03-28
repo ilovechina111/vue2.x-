@@ -76,9 +76,9 @@ export default {
       e.preventDefault();
       try{
         const result = await this.$http.get('/api/login',{params:this.model})
-        // console.log(result);
         if(result.data.code == "0"){
-          alert(result.data.message)
+          this.$store.commit('settoken',result.data.token)
+          window.localStorage.setItem('token',result.data.token)
         }else{
           alert(result.data.message)
         }
