@@ -1,6 +1,16 @@
 <template>
   <div>
-    <cube-form :model="model" :schema="schema" @submit="submitHandler"></cube-form>
+    <img
+      class="logo"
+      src="
+https://file.xdclass.net/video/2020/aliyun-3%E6%9C%88/%E8%BD%AE%E6%92%AD%E5%9B%BE.png"
+      alt=""
+    />
+    <cube-form
+      :model="model"
+      :schema="schema"
+      @submit="submitHandler"
+    ></cube-form>
   </div>
 </template>
 <script>
@@ -49,14 +59,13 @@ export default {
             },
             rules: {
               // 校验规则
-              required: true,
-            
+              required: true
             },
-            trigger: "blur",
+            trigger: "blur"
           },
           {
-            type:"submit",
-            label:"注册"
+            type: "submit",
+            label: "注册"
           }
         ]
       }
@@ -64,12 +73,22 @@ export default {
   },
   methods: {
     submitHandler(e) {
-        e.preventDefault();
-        console.log("注册了");
-        
+      e.preventDefault();
+      this.$http
+        .get("/api/register", { params: this.model })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };
 </script>
 <style lang="less" scoped>
+.logo {
+  height: 150px;
+  width: 100%;
+}
 </style>
