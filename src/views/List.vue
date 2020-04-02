@@ -1,25 +1,25 @@
 <template>
   <div class="panelsBox">
-      <cube-scroll class="panelsLeft">
-        <ul>
-          <li
-            v-for="(list, index) in tabsLabel"
-            :key="index"
-            @click="selectList(index)"
-            :class="list.active ? 'active' : ''"
-          >
-            {{ list.label }}
-          </li>
-        </ul>
-      </cube-scroll>
-      <cube-scroll class="panelsRight">
-        <ul>
-          <li v-for="(tag, index) in tags" :key="index">
-            <img :src="tag.image" alt="" />
-            <p>{{ tag.label }}</p>
-          </li>
-        </ul>
-      </cube-scroll>
+    <cube-scroll class="panelsLeft">
+      <ul>
+        <li
+          v-for="(list, index) in tabsLabel"
+          :key="index"
+          @click="selectList(index)"
+          :class="list.active ? 'active' : ''"
+        >
+          {{ list.label }}
+        </li>
+      </ul>
+    </cube-scroll>
+    <cube-scroll class="panelsRight">
+      <ul>
+        <li v-for="(tag, index) in tags" :key="index">
+          <img :src="tag.image" alt="" />
+          <p>{{ tag.label }}</p>
+        </li>
+      </ul>
+    </cube-scroll>
   </div>
 </template>
 
@@ -72,6 +72,22 @@ export default {
           label: "女鞋",
           active: false
         },
+        {
+          label: "手机数码",
+          active: false
+        },
+        {
+          label: "家用电器",
+          active: false
+        },
+        {
+          label: "手机数码",
+          active: false
+        },
+        {
+          label: "家用电器",
+          active: false
+        }
       ],
       tags: []
     };
@@ -95,6 +111,14 @@ export default {
       });
       this.tags = result.data;
     }
+  },
+  mounted() {
+    //   设置滚动盒子的高度
+    const panelsLeft = document.querySelector(".panelsLeft");
+    const panelsRight = document.querySelector(".panelsRight");
+    const bodyHeight = document.documentElement.clientHeight;
+    panelsLeft.style.height = bodyHeight - 53 + "px";
+    panelsRight.style.height = bodyHeight - 53 + "px";
   },
   created() {
     //   获取默认的分类数据
