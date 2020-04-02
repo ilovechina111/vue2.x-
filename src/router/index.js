@@ -25,6 +25,38 @@ const routes = [
     path: "/index",
     name: "index",
     component: () => import("@/views/index.vue")
+  },
+  {
+    path: "/bottomNav",
+    name: "bottomNav",
+    component: () => import("@/views/bottomNav.vue"),
+    children:[
+      {
+        path: "index",
+        name: "index",
+        component: () => import("@/views/index.vue")
+      },
+      {
+        path: "list",
+        name: "list",
+        component: () => import("@/views/List.vue")
+      },
+      {
+        path: "search",
+        name: "search",
+        component: () => import("@/views/Search.vue")
+      },
+      {
+        path: "cart",
+        name: "cart",
+        component: () => import("@/views/Cart.vue")
+      },
+      {
+        path: "mine",
+        name: "mine",
+        component: () => import("@/views/Mine.vue")
+      },
+    ]
   }
 ];
 
