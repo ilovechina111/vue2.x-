@@ -16,7 +16,7 @@
       <ul>
         <li v-for="(tag, index) in tags" :key="index">
           <img :src="tag.image" alt="" />
-          <p>{{ tag.label }}</p>
+          <p>{{ tag.label }}<i class="cubeic-add" @click="addtoCart($event,tag)"></i></p>
         </li>
       </ul>
     </cube-scroll>
@@ -93,15 +93,18 @@ export default {
     };
   },
   methods: {
+    addtoCart(e,tag){
+      this.$store.commit('toCart',tag)
+    },
     //   点击不同项切换数据
     selectList(index) {
       this.tabsLabel.forEach((v, i) => {
         if (index == i) {
           v.active = true;
+          this.getClassity(index);
         } else {
           v.active = false;
         }
-        this.getClassity(index);
       });
     },
     //   获取分类数据

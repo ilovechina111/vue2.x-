@@ -11,11 +11,13 @@
       class="botnav"
     >
     </cube-tab-bar>
+    <span class="countsum">{{countsum}}</span>
   </div>
 </template>
 <script>
+import {mapGetters} from 'vuex'
 export default {
-  name: 'botNav',
+  name: "botNav",
   data() {
     return {
       transitionName: "fade-right",
@@ -43,6 +45,11 @@ export default {
         }
       ]
     };
+  },
+  computed:{
+    ...mapGetters({
+      countsum:'countsum'
+    })
   },
   methods: {
     clickHandler(label) {
@@ -75,6 +82,25 @@ export default {
           this.$router.push("/bottomNav/mine");
           break;
       }
+    }
+  },
+  created() {
+    switch (this.$route.path) {
+      case "/bottomNav/index":
+        this.selectedLabelDefault = "首页";
+        break;
+         case "/bottomNav/list":
+        this.selectedLabelDefault = "分类";
+        break;
+         case "/bottomNav/search":
+        this.selectedLabelDefault = "搜索";
+        break;
+         case "/bottomNav/cart":
+        this.selectedLabelDefault = "购物车";
+        break;
+         case "/bottomNav/mine":
+        this.selectedLabelDefault = "我的";
+        break;
     }
   }
 };
@@ -112,5 +138,17 @@ export default {
   opacity: 0;
   -webkit-transform: translate(-100%, 0);
   transform: translate(-100%, 0);
+}
+.countsum{
+  position: fixed;
+  bottom: 33px;
+  right: 23%;
+  z-index: 1111111;
+  font-size: 12px;
+  width: 16px;
+  line-height: 16px;
+  background: red;
+  color: #fff;
+  border-radius: 50%;
 }
 </style>

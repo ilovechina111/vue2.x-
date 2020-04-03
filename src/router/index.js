@@ -21,11 +21,11 @@ const routes = [
     name: "login",
     component: () => import("@/views/Login.vue")
   },
-  {
-    path: "/index",
-    name: "index",
-    component: () => import("@/views/index.vue")
-  },
+  // {
+  //   path: "/index",
+  //   name: "index",
+  //   component: () => import("@/views/index.vue")
+  // },
   {
     path: "/bottomNav",
     name: "bottomNav",
@@ -49,11 +49,17 @@ const routes = [
       {
         path: "cart",
         name: "cart",
+        meta:{
+          requireAuth:true
+        },
         component: () => import("@/views/Cart.vue")
       },
       {
         path: "mine",
         name: "mine",
+        meta:{
+          requireAuth:true
+        },
         component: () => import("@/views/Mine.vue")
       },
     ]
