@@ -3,10 +3,10 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+let store = new Vuex.Store({
   state: {
     token:'',
-    cartArr:[], // 存储购物车商品的数组
+    cartArr: JSON.parse(localStorage.getItem('cartArr')) || [], // 存储购物车商品的数组
   },
   mutations: {
     // commit调用
@@ -15,13 +15,31 @@ export default new Vuex.Store({
       state.token = token
     },
     // 添加商品到购物车
-    toCart(state,tag){
-      let goods = state.cartArr.find(v=>v.title == tag.label)
+    addtoCart(state,tag){
+      let goods = state.cartArr.find(v => v.title == tag.label)
       if(goods){
-        goods.cartCount += 1;
+        goods.cartCount += 1
       }else{
         state.cartArr.push({title:tag.label,cartCount:1})
       }
+    },
+    // 购物车数量加一
+    cartadd(state,index){
+      state.cartArr[index].cartCount++
+    },
+    //购物车商品数量减一
+    cartmove(state,index){
+      if(state.cartArr[index].cartCount > 1){
+        state.cartArr[index].cartCount--
+      }else{
+        if(window.confirm('确定从购物车移除该商品吗？')){
+          state.cartArr.splice(index,1)
+        }
+      }
+    },
+    // 清空购物车
+    clearcart(state){
+      state.cartArr = []
     }
   },
   actions: {
@@ -36,7 +54,10 @@ export default new Vuex.Store({
       })
       return num
     }
-  },
-  modules: {
   }
 })
+  // 监听每次调用mutations的时候,都会进这个方法
+store.subscribe((mutations,state)=>{
+   localStorage.setItem('cartArr',JSON.stringify(state.cartArr))
+})
+export default store

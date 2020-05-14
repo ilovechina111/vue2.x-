@@ -11,7 +11,7 @@
       class="botnav"
     >
     </cube-tab-bar>
-    <span class="countsum">{{countsum}}</span>
+    <span class="countsum" v-if="countsum != 0">{{countsum}}</span>
   </div>
 </template>
 <script>

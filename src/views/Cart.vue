@@ -9,17 +9,18 @@
       </div>
     </div>
     <cube-button style="margin:10px 0">下单</cube-button>
-    <cube-button>清空购物车</cube-button>
+    <cube-button @click="clearCart">清空购物车</cube-button>
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 export default {
   data() {
     return {
+        // cartArr:[]
     };
   },
-  computed: {
+  computed:{
       ...mapState({
           cartArr:state=>state.cartArr
       })
@@ -27,9 +28,17 @@ export default {
   methods: {
      
     // 减少购物车
-    removeCart(index) {},
+    removeCart(index) {
+      this.$store.commit('cartmove',index)
+    },
     // 增加购物车
-    addCart(index) {}
+    addCart(index) {
+      this.$store.commit('cartadd',index)
+    },
+    // 清空购物车
+    clearCart(){
+      this.$store.commit('clearcart')
+    }
   }
 };
 </script>
